@@ -91,8 +91,6 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
 //   Function? onKeyPress;
 //   late TextEditingController textController;
 // >>>>>>> master
-  // The builder function will be called for each Key object.
-  Widget Function(BuildContext context, VirtualKeyboardKey key)? builder;
   late double height;
   double? width;
   late Color textColor;
@@ -341,7 +339,7 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
         // Check if builder is specified.
         // Call builder function if specified or use default
         //  Key widgets if not.
-        if (builder == null) {
+        if (widget.builder == null) {
           // Check the key type.
           switch (virtualKeyboardKey.keyType) {
             case VirtualKeyboardKeyType.String:
@@ -355,8 +353,7 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
           }
         } else {
           // Call the builder function, so the user can specify custom UI for keys.
-          keyWidget = builder!(context, virtualKeyboardKey);
-
+          keyWidget = widget.builder!(context, virtualKeyboardKey);
         }
 
         return keyWidget;
